@@ -64,6 +64,8 @@ jobs:
 
 
   deploy-pages:
+    environment:
+      name: github-pages
     needs: test-coverage
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
