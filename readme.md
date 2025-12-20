@@ -2,15 +2,21 @@
 
 ## Description 
 
-A simple devops learning project base on TODO list application
+A simple devops project base on TODO list application in order to learn and improve skills about devops.
+The main idea is to create a simple application (TODO list) and deploy it using devops best practice and increase scalability.
 
 | stage name | Stage description | difficulty | 
 | ---------  | ----------------- | ---------- |
-| [1.api ](./1.api/1.api.md) | Create simple rest api | easy |
-| [2.test_case ](./2.test_case/2.test_case.md) | Adding test case framework (pytest) to run test | easy |
+| [1.api](./1.api/1.api.md) | Create simple rest api | easy |
+| [2.test_case](./2.test_case/2.test_case.md) | Adding test case framework (pytest) to run test | easy |
+| [3.ci](./3.ci/3.ci.md) | Adding ci to automate testing, linting, packaging, ... | easy |
 
 ## temp idea
 
+- secure it using JSON TOKEN
+- secure it using OAuth 2.0
+- adding a csv export feature
+- separate application into multiple microservice
 - using poetry instead of requirements.txt to manage dependencies and project configuration (pyproject.toml)
 - adding CI (lint, test, package, versioning)
 - fastapi/flask file hierarchy best practice
