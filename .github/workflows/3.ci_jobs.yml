@@ -61,17 +61,13 @@ jobs:
         run: |
           echo "=== workspace root ==="
           pwd
-          echo "=== workspace contents ==="
-          ls -la 
-          echo "=== reports folder contents ==="
-          ls -la reports/
           echo "=== contents ==="
-          ls -R ${{ env.TEST_REPORT_PATH }}|| echo "Folder not found"
+          ls -la ${{ env.GITHUB_WORKSPACE }}/${{ env.TEST_REPORT_PATH }}/
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.TEST_REPORT_PATH }}
+          path: ${{ env.GITHUB_WORKSPACE }}/${{ env.TEST_REPORT_PATH }}/
 
 
   deploy-pages:
