@@ -47,7 +47,7 @@ jobs:
       - name: Generate coverage report for tests 
         run: |
           pip install pytest pytest-cov
-          python -m pytest --cov=${{ env.PROJECT_PATH }} --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }} tests/
+          python -m pytest --cov=tests --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }} tests/
 
       - name: Upload HTML coverage artifact
         uses: actions/upload-artifact@v4
