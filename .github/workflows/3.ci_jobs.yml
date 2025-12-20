@@ -7,7 +7,7 @@ on:
       - .github/workflows/3.ci_jobs.yml
 env:
   PROJECT_PATH: 3.ci
-  TEST_REPORT_PATH: coverage.xml
+  TEST_REPORT_PATH: reports/coverage.xml
   
 jobs:
   build:
@@ -41,8 +41,8 @@ jobs:
 
       - name: Test with pytest
         run: |
-          pip install pytest
-          python -m pytest --cov-report ${{ env.TEST_REPORT_PATH }} tests/
+          pip install pytest pytest-cov
+          python -m pytest --cov-report=html:${{ env.TEST_REPORT_PATH }} tests/
 
       - name: Generate coverage report
         uses: orgoro/coverage@v3.2
