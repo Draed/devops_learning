@@ -1,12 +1,13 @@
 name: Run CI jobs for stage 3 (3.ci)
 
+env:
+  PROJECT_PATH: 3.ci
+
 on:
   push:
     paths:
-      - 3.ci/**
-
-env:
-  PROJECT_PATH: 3.ci
+      - ${{ env.PROJECT_PATH }}/**
+      - .github/workflows/3.ci_jobs.yml
 
 jobs:
   build:
@@ -16,7 +17,7 @@ jobs:
         python-version: ["3.11"]
     defaults:
       run:
-        working-directory: $PROJECT_PATH
+        working-directory: ${{ env.PROJECT_PATH }}
 
     steps:
       - name: Run git checkout
