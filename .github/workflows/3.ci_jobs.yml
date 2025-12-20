@@ -1,12 +1,12 @@
 name: Run CI jobs for stage 3 (3.ci)
 
-env:
-  PROJECT_PATH: "3.ci"
-
 on:
   push:
     paths:
-      - $PROJECT_PATH/**
+      - 3.ci/**
+
+env:
+  PROJECT_PATH: 3.ci
 
 jobs:
   build:
