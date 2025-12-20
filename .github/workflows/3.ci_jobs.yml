@@ -55,19 +55,19 @@ jobs:
           echo "=== workspace root ==="
           pwd
           echo "=== contents ==="
-          ls -la ${GITHUB_WORKSPACE}/${{ env.PROJECT_PATH }}/${{ env.TEST_REPORT_PATH }}/
+          ls -la ./${{ env.PROJECT_PATH }}/${{ env.TEST_REPORT_PATH }}/
 
       - name: Upload HTML coverage artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: ${GITHUB_WORKSPACE}/${{ env.PROJECT_PATH }}/${{ env.TEST_REPORT_PATH }}/
+          path: ./${{ env.PROJECT_PATH }}/${{ env.TEST_REPORT_PATH }}/
           retention-days: 14
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${GITHUB_WORKSPACE}/${{ env.PROJECT_PATH }}/${{ env.TEST_REPORT_PATH }}/
+          path: ./${{ env.PROJECT_PATH }}/${{ env.TEST_REPORT_PATH }}/
 
 
   deploy-pages:
