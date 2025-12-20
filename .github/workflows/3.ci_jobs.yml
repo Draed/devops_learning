@@ -7,6 +7,7 @@ on:
       - .github/workflows/3.ci_jobs.yml
 env:
   PROJECT_PATH: 3.ci
+  TEST_REPORT_PATH: coverage.xml
   
 jobs:
   build:
@@ -33,15 +34,17 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Lint with Ruff
-        run: |
-          pip install ruff
-          ruff --format=github --target-version=py310 .
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: "--format=github --target-version=py310"
         continue-on-error: true
 
       - name: Test with pytest
         run: |
-          coverage run -m pytest  -v -s
+          pytest --cov-report ${{ env.TEST_REPORT_PATH }}
 
-      - name: Generate Coverage Report
-        run: |
-          coverage report -m
+      - name: Generate coverage report
+        uses: orgoro/coverage@v3.2
+        with:
+            coverageFile: ${{ env.TEST_REPORT_PATH }}
+            token: ${{ secrets.GITHUB_TOKEN }}
