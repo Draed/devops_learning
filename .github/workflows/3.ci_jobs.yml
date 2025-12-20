@@ -7,7 +7,7 @@ on:
       - .github/workflows/3.ci_jobs.yml
 env:
   PROJECT_PATH: 3.ci
-  TEST_REPORT_PATH: reports/coverage.xml
+  TEST_REPORT_PATH: reports/coverage-html
   
 jobs:
   test-coverage:
@@ -47,7 +47,7 @@ jobs:
       - name: Generate coverage report for tests 
         run: |
           pip install pytest pytest-cov
-          python -m pytest --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }} tests/
+          python -m pytest --cov=${{ env.PROJECT_PATH }} --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }}
 
       - name: Upload HTML coverage artifact
         uses: actions/upload-artifact@v4
