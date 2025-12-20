@@ -36,12 +36,14 @@ jobs:
       - name: Lint with Ruff
         uses: astral-sh/ruff-action@v3
         with:
-          args: "--format=github --target-version=py310"
+          args: "format=github --target-version=py310"
         continue-on-error: true
 
       - name: Test with pytest
         run: |
-          pytest --cov-report ${{ env.TEST_REPORT_PATH }}
+          python -m venv venv
+          source venv/bin/activate
+          python -m pytest --cov-report ${{ env.TEST_REPORT_PATH }} tests/
 
       - name: Generate coverage report
         uses: orgoro/coverage@v3.2
