@@ -8,6 +8,7 @@ on:
 env:
   PROJECT_PATH: 3.ci
   TEST_REPORT_PATH: reports/coverage-html
+  TESTS_PATH: tests
   
 jobs:
   test-coverage:
@@ -47,19 +48,19 @@ jobs:
       - name: Generate coverage report for tests 
         run: |
           pip install pytest pytest-cov
-          python -m pytest --cov=tests --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }} tests/
+          python -m pytest --cov=tests --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }}
 
       - name: Upload HTML coverage artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: ${{ env.TEST_REPORT_PATH }}
+          path: ${{ env.TESTS_PATH }}/${{ env.TEST_REPORT_PATH }}
           retention-days: 14
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.TEST_REPORT_PATH }}
+          path: ${{ env.TESTS_PATH }}/${{ env.TEST_REPORT_PATH }}
 
 
   deploy-pages:
