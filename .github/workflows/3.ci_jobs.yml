@@ -1,14 +1,13 @@
 name: Run CI jobs for stage 3 (3.ci)
 
-env:
-  PROJECT_PATH: 3.ci
-
 on:
   push:
     paths:
       - 3.ci/**
       - .github/workflows/3.ci_jobs.yml
-
+env:
+  PROJECT_PATH: 3.ci
+  
 jobs:
   build:
     runs-on: ubuntu-latest
