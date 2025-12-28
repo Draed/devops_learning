@@ -6,7 +6,8 @@
 {{description}}
 
 ## Prerequisites
-{{prerequisites}}
+
+- Have python 3 installed
 
 ## Other change from previous stage
 {{other_change_from_previous_stage}}
