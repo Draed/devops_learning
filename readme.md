@@ -13,6 +13,9 @@ The main idea is to create a simple application (TODO list) and deploy it using 
 
 ## temp idea
 
+- env variable configuration
+- logging
+
 - secure it using JSON TOKEN
 - secure it using OAuth 2.0
 - adding a csv export feature

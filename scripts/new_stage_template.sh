@@ -84,7 +84,7 @@ prompt_stage() {
 # -------------------------------------------------
     local __resultvar=$1
     local prompt_msg="Please, enter a stage name : " 
-    local pattern='^[a-zA-Z0-9_]{3,15}$'
+    local pattern='^[a-zA-Z0-9_]{3,20}$'
     local input
 
     while true; do
@@ -101,8 +101,6 @@ prompt_stage() {
         fi
     done
 }
-
-
 
 confirm_or_fallback() {
 # -------------------------------------------------
@@ -196,7 +194,7 @@ export new_stage_name="${next_index_stage}.${stage_name}"
 export date="$(date '+%Y-%m-%d')"
 mkdir -p ${new_stage_name}
 render_template "scripts/template.md" "${new_stage_name}/${new_stage_name}.md"
-echo "✅ New stage markdown successfully created from template"
+echo -e "\n✅ New stage markdown successfully created from template"
 
 ## copy previous content except mardown file
 prev_folder "." $next_index_stage
