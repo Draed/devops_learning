@@ -156,7 +156,7 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ${{ env.GH_PAGES_DIR }} # The directory to build from (root of your repo)
+          source: ${{ github.workspace }}/${{ env.GH_PAGES_DIR }} # The directory to build from (root of your repo)
           destination: ./_site # The directory to write output into
 
       - name: Upload artifact
