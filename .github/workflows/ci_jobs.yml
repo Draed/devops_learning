@@ -19,7 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ${{ env.PYTHON_VERSION }}
+        include:
+          - python-version: ${{ env.PYTHON_VERSION }}
     steps:
       - name: git checkout
         uses: actions/checkout@v6
