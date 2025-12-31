@@ -2,8 +2,9 @@ name: Run CI jobs for stage 3 (3.ci)
 
 on:
   push:
-    - '!scripts/**' 
-    - '!**/docs/**'
+    paths:
+      - '!scripts/**' 
+      - '!**/docs/**'
 
 env:
   TEST_REPORT_PATH: "reports/coverage-html"

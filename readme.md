@@ -10,7 +10,7 @@ The main idea is to create a simple application (TODO list) and deploy it using 
 | [1.api](./1.api/1.api.md) | Create simple rest api | easy |
 | [2.test_case](./2.test_case/2.test_case.md) | Adding test case framework (pytest) to run test | easy |
 | [3.ci](./3.ci/3.ci.md) | Adding ci to automate testing, linting, packaging, ... | easy |
-| [4.python_docstring](./4.python_docstring/4.python_docstring.md) | Adding ci to automate testing, linting, packaging, ... | easy |
+| [4.python_docstring](./4.python_docstring/4.python_docstring.md) | Adding docstring documentation and html pdoc page... | easy |
 
 
 ## temp idea
