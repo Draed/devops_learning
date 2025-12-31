@@ -84,7 +84,7 @@ jobs:
         run: |
           mkdir -p ${{ env.GH_PAGES_DIR }}
           cp readme.md ${{ env.GH_PAGES_DIR }}
-          cp ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }} ${{ env.GH_PAGES_DIR }}
+          cp -r ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }} ${{ env.GH_PAGES_DIR }}
 
 ####################################
 ## documentation generation (pdoc)
