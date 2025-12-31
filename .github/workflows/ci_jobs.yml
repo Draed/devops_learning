@@ -10,7 +10,7 @@ env:
   TEST_REPORT_PATH: "reports/coverage-html"
   TESTS_PATH: "tests"
   PYTHON_VERSION : "3.11"
-  
+
 jobs:
 ####################################
 ## python code linting (ruff) 
@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["${{ PYTHON_VERSION }}"]
+        python-version: ${{ env.PYTHON_VERSION }}
     steps:
       - name: git checkout
         uses: actions/checkout@v6
