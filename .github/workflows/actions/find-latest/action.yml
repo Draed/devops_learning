@@ -1,0 +1,28 @@
+name: "Find latest numbered file"
+description: "Detects the file with the highest leading integer (e.g. 1.txt, 2.log)."
+author: "draed"
+inputs: {}
+outputs:
+  latest-stage-folder:
+    description: "Name of the latest file"
+    value: ${{ steps.find.outputs.latest-stage-folder }}
+runs:
+  using: "composite"
+  steps:
+    - id: find
+      name: Find latest file
+      shell: bash
+      run: |
+        #!/usr/bin/env bash
+        shopt -s nullglob
+        files=([0-9]*.*)
+        if (( ${#files[@]} == 0 )); then
+          echo "No matching files" >&2
+          exit 1
+        fi
+        latest=$(printf "%s\n" "${files[@]}" |
+                awk -F. '{print $1 "\t" $0}' |
+                sort -n -k1,1 |
+                tail -n1 | cut -f2-)
+
+        echo "latest-stage-folder=$latest" >> "$GITHUB_OUTPUT"
