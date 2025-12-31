@@ -13,6 +13,27 @@ env:
   PYTHON_VERSION : "3.11"
   
 jobs:
+####################################
+## python code linting (ruff) 
+####################################
+  code-linting:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["$PYTHON_VERSION"]
+    steps:
+      - name: Run git checkout
+        uses: actions/checkout@v6
+
+      - name: Lint with Ruff
+        uses: astral-sh/ruff-action@v3
+        with:
+          args: "format"
+        continue-on-error: true
+
+####################################
+## test case 
+####################################
   test-coverage:
     runs-on: ubuntu-latest
     strategy:
@@ -23,7 +44,6 @@ jobs:
       actions: write ## needed to upload artifacts
       pages: write ## needed to deploy to GitHub Pages
       id-token: write ## needed for OIDC token
-
     steps:
       - name: Run git checkout
         uses: actions/checkout@v6
@@ -42,12 +62,6 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Lint with Ruff
-        uses: astral-sh/ruff-action@v3
-        with:
-          args: "format"
-        continue-on-error: true
-
       - name: Generate coverage report for tests 
         run: |
           pip install pytest pytest-cov
@@ -65,6 +79,9 @@ jobs:
         with:
           path: ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }}/
 
+####################################
+## documentation generation (pdoc)
+####################################
   documentation-generation:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # only generate documentation on main branch
@@ -88,6 +105,9 @@ jobs:
           cd ${{ steps.latest.outputs.latest-stage-folder }}
           pdoc app/ --output-dir docs --docformat google
 
+####################################
+## github page deploy
+####################################
   deploy-pages:
     environment:
       name: github-pages
