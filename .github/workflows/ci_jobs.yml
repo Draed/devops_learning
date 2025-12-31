@@ -82,9 +82,9 @@ jobs:
 
       - name: Create GH page folder and add test report
         run: |
-          mkdir -p ${{ env.GITHUB_WORKSPACE }}/${{ env.GH_PAGES_DIR }}
-          cp readme.md ${{ env.GITHUB_WORKSPACE }}/${{ env.GH_PAGES_DIR }}
-          cp -r ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }} ${{ env.GITHUB_WORKSPACE }}/${{ env.GH_PAGES_DIR }}
+          mkdir -p ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
+          cp readme.md ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
+          cp -r ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }} ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
 
 ####################################
 ## documentation generation (pdoc)
@@ -116,7 +116,7 @@ jobs:
         run: |
           pip install pdoc
           cd ${{ steps.latest.outputs.latest-stage-folder }}
-          pdoc app/ --output-dir ${{ env.GITHUB_WORKSPACE }}/${{ env.GH_PAGES_DIR }}/docs --docformat google
+          pdoc app/ --output-dir ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}/docs --docformat google
 
 ####################################
 ## github page build (jekyll)
