@@ -133,6 +133,11 @@ jobs:
       id-token: write
 
     steps:
+      - name: git checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -140,7 +145,7 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./${{ env.GH_PAGES_DIR }} # The directory to build from (root of your repo)
+          source: ${{ env.GH_PAGES_DIR }} # The directory to build from (root of your repo)
           destination: ./_site # The directory to write output into
 
       - name: Upload artifact
