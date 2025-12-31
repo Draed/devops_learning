@@ -106,9 +106,12 @@ jobs:
 
       - name: generate code documentation using pdoc
         run: |
+          echo ${{ steps.latest.outputs.latest-stage-folder }}
+          pwd
           pip install pdoc
           cd ${{ steps.latest.outputs.latest-stage-folder }}
-          pdoc app/ --output-dir docs --docformat google
+          pwd
+          pdoc app/ --output-dir ../docs --docformat google
 
 ####################################
 ## github page deploy
