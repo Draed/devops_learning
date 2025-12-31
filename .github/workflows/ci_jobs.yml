@@ -73,18 +73,12 @@ jobs:
           cd ${{ steps.latest.outputs.latest-stage-folder }}
           python -m pytest --cov=tests --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }}
 
-      - name: Upload HTML coverage artifact
+      - name: Upload test report artifact
         uses: actions/upload-artifact@v4
         with:
           name: test-report
           path: ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }}/
-          retention-days: 14
-
-      - name: Create GH page folder and add test report
-        run: |
-          mkdir -p ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
-          cp readme.md ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
-          cp -r ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }} ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
+          retention-days: 7
 
 ####################################
 ## documentation generation (pdoc)
@@ -116,7 +110,14 @@ jobs:
         run: |
           pip install pdoc
           cd ${{ steps.latest.outputs.latest-stage-folder }}
-          pdoc app/ --output-dir ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}/docs --docformat google
+          pdoc app/ --output-dir docs --docformat google
+
+      - name: Upload code documentation artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-documentation
+          path: ./${{ steps.latest.outputs.latest-stage-folder }}/docs
+          retention-days: 7
 
 ####################################
 ## github page build (jekyll)
@@ -142,10 +143,20 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
+      - name: Create GH page folder
+        run: |
+          mkdir -p ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
+          cp readme.md ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
+
+      - name: Download all workflow run artifacts
+        uses: actions/download-artifact@v5
+        with:
+          path: ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
+
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ${{ github.workspace }}/${{ env.GH_PAGES_DIR }} # The directory to build from (root of your repo)
+          source: ${{ env.GH_PAGES_DIR }} # The directory to build from (root of your repo)
           destination: ./_site # The directory to write output into
 
       - name: Upload artifact
