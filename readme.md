@@ -1,15 +1,19 @@
-# devops learning
-
 ## Description 
 
 A simple devops project base on TODO list application in order to learn and improve skills about devops.
 The main idea is to create a simple application (TODO list) and deploy it using devops best practice and increase scalability.
+
+Below all the steps (also called "stages") that occured during the app creation :
 
 | stage name | Stage description | difficulty | 
 | ---------  | ----------------- | ---------- |
 | [1.api](./1.api/1.api.md) | Create simple rest api | easy |
 | [2.test_case](./2.test_case/2.test_case.md) | Adding test case framework (pytest) to run test | easy |
 | [3.ci](./3.ci/3.ci.md) | Adding ci to automate testing, linting, packaging, ... | easy |
-| [4.python_docstring](./4.python_docstring/4.python_docstring.md) | Adding docstring documentation and html pdoc page... | easy |
+| [4.python_docstring](./4.python_docstring/4.python_docstring.md) | Adding docstring documentation and html pdoc pages | easy |
 
 [temporary idea](./idea.md) 
+
+## Documentation 
+
+Code documentation is available at this [github pages](./docs/index.html)
