@@ -1,9 +1,14 @@
+"""
+Todo app main python file
+"""
+
 from fastapi import FastAPI, HTTPException
 from typing import Dict, List
 
 from app.models import Todo
-from app.database import db
+from app.database import Database
 
+db = Database()
 app = FastAPI()
 
 @app.post("/todos/", response_model=Todo)
@@ -16,7 +21,7 @@ async def create_todo(todo: Todo) -> Todo:
         item: Todo data (title and optional completed flag).
 
     Returns:
-        The created ``Todo`` with a generated ``id``.
+        Todo: The created ``Todo`` with a generated ``id``.
     """
     return await db.add_todo(todo)
 
