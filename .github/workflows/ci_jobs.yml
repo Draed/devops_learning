@@ -6,9 +6,16 @@ on:
       - 'scripts/**' 
       - '**/docs/**'
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 env:
   TEST_REPORT_PATH: "reports/coverage-html"
   TESTS_PATH: "tests"
+  GH_PAGES_DIR: "gh_pages"
   PYTHON_VERSION : "3.11"
 
 jobs:
@@ -30,7 +37,7 @@ jobs:
         continue-on-error: true
 
 ####################################
-## test case 
+## test case (pytest-cov)
 ####################################
   test-coverage:
     runs-on: ubuntu-latest
@@ -69,14 +76,15 @@ jobs:
       - name: Upload HTML coverage artifact
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
+          name: test-report
           path: ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }}/
           retention-days: 14
 
-      - name: Upload latest stage pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }}/
+      - name: Create GH page folder and add test report
+        run: |
+          mkdir -p ${{ env.GH_PAGES_DIR }}
+          cp readme.md ${{ env.GH_PAGES_DIR }}
+          cp ./${{ steps.latest.outputs.latest-stage-folder }}/${{ env.TEST_REPORT_PATH }} ${{ env.GH_PAGES_DIR }}
 
 ####################################
 ## documentation generation (pdoc)
@@ -106,28 +114,51 @@ jobs:
 
       - name: generate code documentation using pdoc
         run: |
-          echo ${{ steps.latest.outputs.latest-stage-folder }}
-          pwd
           pip install pdoc
           cd ${{ steps.latest.outputs.latest-stage-folder }}
-          pwd
-          pdoc app/ --output-dir ../docs --docformat google
+          pdoc app/ --output-dir ../${{ env.GH_PAGES_DIR }}/docs --docformat google
+
+####################################
+## github page build (jekyll)
+####################################
+  build-pages:
+    needs: 
+      - test-coverage
+      - documentation-generation
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' # only build pages on main branch
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./${{ env.GH_PAGES_DIR }} # The directory to build from (root of your repo)
+          destination: ./_site # The directory to write output into
+
+      - name: Upload artifact
+        # Automatically uploads an artifact from the './_site' directory by default
+        uses: actions/upload-pages-artifact@v3
 
 ####################################
 ## github page deploy
 ####################################
   deploy-pages:
+    needs: build-pages
     environment:
       name: github-pages
-    needs: 
-      - test-coverage
-      - documentation-generation
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # only deploy pages on main branch
-    permissions:
-      pages: write
-      id-token: write
 
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
