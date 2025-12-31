@@ -173,6 +173,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # only deploy pages on main branch
+    permissions:
+      id-token: write
 
     steps:
       - name: Deploy to GitHub Pages
