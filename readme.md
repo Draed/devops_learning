@@ -11,8 +11,8 @@ Below all the steps (also called "stages") that occured during the app creation 
 | [2.test_case](./2.test_case/2.test_case.md) | Adding test case framework (pytest) to run test | easy |
 | [3.ci](./3.ci/3.ci.md) | Adding ci to automate testing, linting, packaging, ... | easy |
 | [4.python_docstring](./4.python_docstring/4.python_docstring.md) | Adding docstring documentation and html pdoc pages | easy |
+| [5.env_var_config](./5.env_var_config/5.env_var_config.md) | Adding the capacity to load settings/parameters from env vars/ env file | easy |
 
-[temporary idea](./idea.md) 
 
 ## Documentation 
 
