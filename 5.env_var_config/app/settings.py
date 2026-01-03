@@ -76,18 +76,19 @@ class Settings(BaseSettings):
         env_file_encoding = "utf-8"
 
 def load_settings() -> Settings:
-    # 1️⃣ Check whether a .env file exists
+    ## Check whether a .env file exists
     env_path = Path(".env")
     if env_path.is_file():
         logging.info("Loading configuration from .env file")
     else:
         logging.info(".env file not found - using only OS environment variables")
 
-    # 2️⃣ Attempt to create the Settings instance
+    ## Attempt to create the Settings instance
     try:
-        return Settings()          # pydantic reads .env (if present) + os.environ
+        ## pydantic reads .env (if present) + os.environ
+        return Settings()
     except ValidationError as exc:
-        # 3️⃣ Required variables missing → show a clear message and exit
+        ## If required variables missing then show a clear message and exit
         missing = "\n".join(
             f"  • {err['loc'][0]}: {err['msg']}"
             for err in exc.errors()

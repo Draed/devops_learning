@@ -71,6 +71,7 @@ jobs:
         run: |
           pip install pytest pytest-cov
           cd ${{ steps.latest.outputs.latest-stage-folder }}
+          if [ -f example.env  ]; then cp example.env .env; else echo "missing example.env  file, aborting"; exit 1; fi
           python -m pytest --cov=tests --cov-report=term-missing --cov-report=html:${{ env.TEST_REPORT_PATH }}
 
       - name: Upload test report artifact
@@ -110,6 +111,7 @@ jobs:
         run: |
           pip install pdoc
           cd ${{ steps.latest.outputs.latest-stage-folder }}
+          if [ -f example.env  ]; then cp example.env .env; else echo "missing example.env  file, aborting"; exit 1; fi
           pdoc app/ --output-dir docs --docformat google
 
       - name: Upload code documentation artifact
