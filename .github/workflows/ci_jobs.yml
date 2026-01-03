@@ -149,6 +149,7 @@ jobs:
         run: |
           mkdir -p ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
           cp readme.md ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
+          find . -type f -name '*.md' -exec cp --parents {} ${{ github.workspace }}/${{ env.GH_PAGES_DIR }} \;
 
       - name: Download all workflow run artifacts
         uses: actions/download-artifact@v5
