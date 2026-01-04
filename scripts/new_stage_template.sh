@@ -198,7 +198,7 @@ echo -e "\n✅ New stage markdown successfully created from template"
 
 ## copy previous content except mardown file
 prev_folder "." $next_index_stage
-rsync -avq --exclude='*.md' "$previous_stage_folder"/ "$new_stage_name"/
+rsync -avq --exclude='*.md' --exclude='venv' "$previous_stage_folder"/ "$new_stage_name"/
 echo "✅ Content from previous stage (${previous_stage_folder}) successfully copied to new stage folder (${new_stage_name})"
 echo "📝 You can now edit new stage markdown at '${new_stage_name}/${new_stage_name}.md'"
 echo "📑 Don't forget to edit the main readme.md file to add this new stage in the table"

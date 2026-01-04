@@ -1,6 +1,5 @@
 ## temp idea
 
-- env variable configuration
 - logging
 - fastapi/flask file hierarchy best practice
 
