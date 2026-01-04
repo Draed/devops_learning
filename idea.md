@@ -8,11 +8,15 @@
 - adding a csv export feature
 - separate application into multiple microservice
 
+- Opentelemetry integration
+- adding CORS middleware
 
 - optimize python code following best practices (docstrings)
 - add a script to remove all comment in code
 - add a script to condense code (remove all uneeded carriage return) and compare code size optimization
 - dockerize application :
+    - add dockerignore file
+    - add dockerfile
     - Add health‑check endpoint
     - clear python code script (remove comment, optimize code size)
 - deploy application using docker-compose

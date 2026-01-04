@@ -1,0 +1,76 @@
+"""
+Todo app main python file
+"""
+
+from fastapi import FastAPI, Request, HTTPException
+from typing import Dict, List
+
+from app.settings import load_settings
+from app.logger import build_logger
+from app.models import Todo
+from app.database import Database
+
+## load app settings
+settings = load_settings()
+
+## configure logging
+logger = build_logger(settings)
+
+## load database object
+db = Database()
+
+## create fast api "app" object using settings
+app = FastAPI(title=settings.app_name, debug=settings.debug)
+logger.debug("Application successfuly started !")
+
+## custom middleware to log every requests
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    logger.debug(f"{request.method} {request.url}")
+    logger.debug(f"Headers: {dict(request.headers)}")
+    response = await call_next(request)
+    logger.debug(f"Completed with status {response.status_code}")
+    return response
+
+@app.post("/todos/", response_model=Todo)
+async def create_todo(todo: Todo) -> Todo:
+    """Create a todo item.
+
+    A server-generated identifier is returned.
+
+    Args:
+        item: Todo data (title and optional completed flag).
+
+    Returns:
+        Todo: The created ``Todo`` with a generated ``id``.
+    """
+    return await db.add_todo(todo)
+
+@app.get("/todos/", response_model=Dict[int, Todo])
+async def read_todos() -> List[Todo]:
+    """Return all stored todo items."""
+    return await db.list_todos()
+
+@app.get("/todos/{todo_id}", response_model=Todo)
+async def read_todo(todo_id: int) -> Todo:
+    """Fetch a todo by its identifier.
+
+    Raises:
+        HTTPException: 404 if the todo does not exist.
+    """
+    todo = await db.get_todo(todo_id)
+    if not todo:
+        raise HTTPException(status_code=404, detail="Todo not found")
+    return todo
+
+@app.delete("/todos/{todo_id}", response_model=dict)
+async def delete_todo(todo_id: int) -> str:
+    """Remove a todo from the store.
+
+    Raises:
+        HTTPException: 404 if the todo does not exist.
+    """
+    success = await db.delete_todo(todo_id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Todo not found")
+    return {"message": "Todo deleted successfully"}
