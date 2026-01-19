@@ -84,7 +84,7 @@ prompt_stage() {
 # -------------------------------------------------
     local __resultvar=$1
     local prompt_msg="Please, enter a stage name : " 
-    local pattern='^[a-zA-Z0-9_]{3,20}$'
+    local pattern='^[a-zA-Z0-9_]{3,30}$'
     local input
 
     while true; do

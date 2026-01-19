@@ -1,19 +1,17 @@
 ## temp idea
 
-- logging
-- fastapi/flask file hierarchy best practice
-
-- secure it using JSON TOKEN
+- adding database and SQLAlchemy as ORM
 - secure it using OAuth 2.0
+- add keycloak for authentication
 - adding a csv export feature
 - separate application into multiple microservice
 
 - Opentelemetry integration
 - adding CORS middleware
 
-- optimize python code following best practices (docstrings)
 - add a script to remove all comment in code
 - add a script to condense code (remove all uneeded carriage return) and compare code size optimization
+
 - dockerize application :
     - add dockerignore file
     - add dockerfile
