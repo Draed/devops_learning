@@ -17,6 +17,7 @@ env:
   TESTS_PATH: "tests"
   GH_PAGES_DIR: "gh_pages"
   PYTHON_VERSION : "3.11"
+  APP_NAME: "todo_app"
 
 jobs:
 ####################################
@@ -91,8 +92,8 @@ jobs:
       contents: write
       packages: write
     outputs:
-      new_tag: ${{ steps.semantic.outputs.new_tag }}
-      new_version: ${{ steps.semantic.outputs.new_version }}
+      new_tag: ${{ steps.semantic.outputs.new_release_git_tag }}
+      new_version: ${{ steps.semantic.outputs.new_release_version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
