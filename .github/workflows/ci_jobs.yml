@@ -219,9 +219,7 @@ jobs:
 ####################################
   build-pages:
     needs: 
-      - test-coverage
       - documentation-generation
-      - build-and-push
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # only build pages on main branch
     permissions:
@@ -250,7 +248,7 @@ jobs:
         with:
           path: ${{ github.workspace }}/${{ env.GH_PAGES_DIR }}
           pattern: artifact-*
-          merge-multiple: true
+          merge-multiple: false
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
