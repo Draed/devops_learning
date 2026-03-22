@@ -13,6 +13,8 @@ Below all the steps (also called "stages") that occured during the app creation 
 | [4.python_docstring](./4.python_docstring/4.python_docstring.md) | Adding docstring documentation and html pdoc pages | easy |
 | [5.env_var_config](./5.env_var_config/5.env_var_config.md) | Adding the possibility to load settings/parameters from env vars/ env file | easy |
 | [6.logging](./6.logging/6.logging.md) | Adding logging in order to quickly debug application | easy |
+| [7.fastapi_project_structure](./7.fastapi_project_structure/7.fastapi_project_structure.md) | Use fastapi best practices project structure | easy |
+| [8.dockerise_service](./8.dockerise_service/8.dockerise_service.md) | Dockerise fastapi service | easy |
 
 ## Documentation 
 
