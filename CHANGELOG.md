@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/Draed/devops_learning/compare/v1.0.4...v1.0.5) (2026-03-22)
+
+
+### Bug Fixes
+
+* try to fix github pages ([8866421](https://github.com/Draed/devops_learning/commit/886642150ed73ceab66b0898b9696235cb9aee61))
+
 ## [1.0.4](https://github.com/Draed/devops_learning/compare/v1.0.3...v1.0.4) (2026-03-22)
 
 
