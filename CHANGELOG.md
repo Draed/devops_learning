@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/Draed/devops_learning/compare/v1.0.3...v1.0.4) (2026-03-22)
+
+
+### Bug Fixes
+
+* fix artifact list to prevent getting image in gh pages jobs ([3a37741](https://github.com/Draed/devops_learning/commit/3a377416051867f699ccb8a7392290fef5f98361))
+* fix ci actions/download-artifact@v8 job by using pattern instead of name attribute ([1670203](https://github.com/Draed/devops_learning/commit/16702037b9f3e566e1754cd6843822b356db8bd8))
+
 ## [1.0.3](https://github.com/Draed/devops_learning/compare/v1.0.2...v1.0.3) (2026-03-22)
 
 
