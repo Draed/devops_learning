@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Draed/devops_learning/compare/v1.0.1...v1.0.2) (2026-03-22)
+
+
+### Bug Fixes
+
+* fixing 'FromAsCasing' and remove backport package in docker image ([0389cea](https://github.com/Draed/devops_learning/commit/0389cea2cfbc52c3be765475bc13ee6f363c27ae))
+
 ## [1.0.1](https://github.com/Draed/devops_learning/compare/v1.0.0...v1.0.1) (2026-03-22)
 
 
