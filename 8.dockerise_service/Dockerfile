@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.11
-FROM python:${PYTHON_VERSION}-slim as builder
+FROM python:${PYTHON_VERSION}-slim AS builder
 
 ## install pip requirements dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -34,7 +34,6 @@ RUN useradd -r ${APP_USER}
     
 ## install final images packages dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpython3.11 \
     libpq5 \
     && rm -rf /var/lib/apt/lists/*
 
