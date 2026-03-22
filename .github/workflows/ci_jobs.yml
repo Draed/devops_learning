@@ -170,18 +170,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Create release notes
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ needs.release.outputs.new_tag }}
-          release_name: Release ${{ needs.release.outputs.new_tag }}
-          body: |
-            Docker image pushed to: `ghcr.io/${{ github.repository }}:${{ needs.release.outputs.new_version }}`
-          draft: false
-          prerelease: false
-
 ####################################
 ## documentation generation (pdoc)
 ####################################
