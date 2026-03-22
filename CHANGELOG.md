@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Draed/devops_learning/compare/v1.0.2...v1.0.3) (2026-03-22)
+
+
+### Bug Fixes
+
+* removing release manual creation as semantic release automatically generate it ([355e340](https://github.com/Draed/devops_learning/commit/355e34009233c6d759ea86bc3da721e6b7a1dce5))
+
 ## [1.0.2](https://github.com/Draed/devops_learning/compare/v1.0.1...v1.0.2) (2026-03-22)
 
 
